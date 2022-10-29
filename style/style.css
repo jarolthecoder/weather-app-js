@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+:root {
+    --clr-white: #fff;
+    --clr-grey: #d2d2d2;
+    --clr-text-dark: #090b15;
+    --clr-light-blue: #2f96a3;
+    --clr-dark-blue: #303e8f;
+    --clr-min-temp: #bdd3ff;
+    --clr-max-temp: #feb4b4;
+
+    --ff-body: 'DM Sans', sans-serif;
+
+    --fs-small: 0.85rem;
+    --fs-regular: 1.1rem;
+    --fs-medium: 1.5rem;
+    --fs-large: 2rem;
+
+    --fw-regular: 400;
+    --fw-bold: 700;
+
+}
+
+/* GENERAL ADJUST =============================================================== */
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    padding: 3rem 0;
+    font-family: var(--ff-body);
+    background: linear-gradient(var(--clr-dark-blue), var(--clr-light-blue));
+}
+
+ul {
+    list-style-type: none;
+}
+
+header,
+main {
+    width: 100%;
+    max-width: 750px;
+    padding: 1rem 0;
+}
+
+main {
+    flex-direction: column;
+}
+
+/* FONTS - Color, Size, Weight =============================================================== */
+h1,
+h2,
+.search-input,
+.day,
+.current-day,
+.temperature,
+.scale,
+.temp-description,
+.min-max-holder  {
+    color: var(--clr-white);
+}
+
+h4 {
+    color: var(--clr-grey);
+}
+
+.min-title {
+    color: var(--clr-min-temp);
+}
+.max-title {
+    color: var(--clr-max-temp);
+}
+
+.search-btn {
+    font-size: var(--fs-regular);
+}
+
+.search-input {
+    font-size: var(--fs-medium);
+}
+.location,
+.time {
+    font-size: var(--fs-large);
+}
+
+.temperature {
+    font-size: 5rem;
+}
+
+.day,
+.current-day,
+.temperature,
+.temp-title,
+.scale {
+    font-weight: var(--fw-bold);
+}
+
+/* DISPLAY FLEX =============================================================== */
+body,
+main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.min-max-holder {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+main,
+.min-max-holder {
+    gap: 2rem;
+}
+
+/* SEARCH FORM =============================================================== */
+.search-holder {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1rem;
+}
+
+.search-input {
+    width: 50%;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    border: 2px solid var(--clr-grey);
+    background: none;
+}
+
+.search-input::placeholder {
+    color: var(--clr-grey);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--clr-light-blue);
+}
+
+.search-btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 3px;
+    border: none;
+    text-transform: uppercase;
+}
+
+/* FORECAST DISPLAY ============================================================= */
+.forecast-header {
+    width: 100%;
+    text-align: center;
+    padding: 3rem 2rem;
+    background:#adadad38;
+    backdrop-filter: blur( 10px);
+    border-radius: 15px;
+}
+
+
+.forecast-holder {
+    width: 100%;
+    padding: 3rem 2rem;
+    background:#adadad38;
+    backdrop-filter: blur( 10px);
+    border-radius: 15px;
+}
+
+.forecast-holder h4 {
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+    border-bottom: 1.5px solid var(--clr-grey);
+}
+
+.weather-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1.5px solid var(--clr-grey);
+}
+
+.weather-icon-holder {
+    text-align: center;
+}
+
+.temp-description::first-letter {
+    text-transform: uppercase;
+}
+
+.min-max-holder {
+    padding-top: 1rem;
+}
+
+/* Responsive Adjust ======================================================================*/
+@media screen and (max-width: 750px) {
+    :root {
+        --fs-small: 0.85rem;
+        --fs-regular: 1rem;
+        --fs-medium: 1.2rem;
+        --fs-large: 1.7rem;
+    }
+
+    .location {
+        font-size: var(--fs-regular);
+    }
+
+    .temperature {
+        font-size: 3rem;
+    }
+
+    header {
+        display: none;
+    }
+
+    header,
+    main {
+        max-width: 95%;
+    }
+
+    .weather-icon {
+        width: 40px;
+    }
+
+    .weather-card {
+        grid-template-columns: repeat(2, 1fr) 2fr;
+    }
+}

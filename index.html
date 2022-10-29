@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+    <header>
+        <form class="search-holder">
+            <input class="search-input" type="text" placeholder="Search city...">
+            <button class="search-btn">Search</button>
+        </form>
+    </header>
+    <main>
+        <section class="forecast-header">
+            <div class="location-holder">
+                <h1 class="location"></h1>
+            </div>
+            <h2 class="temperature-holder">
+                <span class="temperature"></span>
+                <span class="scale"></span>
+            </h2>
+            <p class="temp-description"></p>
+            <div class="min-max-holder">
+                <p>
+                    <span class="temp-title">Min: </span>
+                    <span class="min-temp"></span>
+                </p>
+                <p>
+                    <span class="temp-title">Max: </span>
+                    <span class="max-temp"></span>
+                </p>
+            </div>
+        </section>
+        <section class="forecast-holder">
+            <h4><i class="fa-solid fa-calendar-days"></i> 3-day forecast</h4>
+            <ul class="forecast-list">
+                <!-- Forecast days -->
+            </ul>
+        </section>
+    </main>
+
+    <!-- JS Script -->
+    <script src="./script/app.js"></script>
+</body>
+</html>
