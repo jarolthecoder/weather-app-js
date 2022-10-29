@@ -214,6 +214,10 @@ main,
         font-size: 3rem;
     }
 
+    body {
+        padding: 1.5rem 0;
+    }
+
     header {
         display: none;
     }
