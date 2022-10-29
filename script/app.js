@@ -14,8 +14,14 @@ function getForecast() {
 
             // Weather API
             const apiKey = '0cb85d1b78724adcb31145606222206';
-            const serviceUrl = 'http://api.weatherapi.com/v1/forecast.json?';
+            let serviceUrl;
             const urlParams = `key=${apiKey}&q=${lat},${long}&days=7`;
+
+            if (location.protocol === 'http:') {
+                serviceUrl = 'http://api.weatherapi.com/v1/forecast.json?';
+            } else {
+                serviceUrl = 'https://api.weatherapi.com/v1/forecast.json?';
+            }
             
             fetch(`${serviceUrl}${urlParams}`)
                 .then(resp => { resp.json()
