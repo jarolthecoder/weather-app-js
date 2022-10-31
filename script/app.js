@@ -1,29 +1,29 @@
+const searchForm = document.querySelector('.search-holder');
+const searchInput = document.querySelector('.search-input');
 const locationTimezone = document.querySelector('.location');
 const temperature = document.querySelector('.temperature');
 const weatherIcon = document.querySelectorAll('.weather-icon');
 const tempDescription = document.querySelector('.temp-description');
-
 const forecastList = document.querySelector('.forecast-list');
 const minTemp = document.querySelector('.min-temp');
 const maxTemp = document.querySelector('.max-temp');
+
 // Weather API
-let serviceUrl;
 const apiKey = '0cb85d1b78724adcb31145606222206';
+let serviceUrl;
 let urlParams;
 
-const searchForm = document.querySelector('.search-holder');
-const searchInput = document.querySelector('.search-input');
 
+// Gets forecast based on user search
 searchForm.addEventListener('submit', (e)=> {
-    e.preventDefault();
     const userInput = searchInput.value;
+    e.preventDefault();
     urlParams = `key=${apiKey}&q=${userInput}&days=7`;
-    getForecast()
-    console.log(`${serviceUrl}${urlParams}`)
-    
+    getForecast();    
 });
 
-function getForecastLocation() {
+// Gets forecast of the users current location
+window.addEventListener('load', ()=> {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( position => {
             const {latitude: lat, longitude: long} = position.coords;
@@ -37,11 +37,12 @@ function getForecastLocation() {
             }
 
             getForecast();
-            console.log(`${serviceUrl}${urlParams}`)
         });
     }
-}
+})
 
+
+// Forecast API Call
 function getForecast() {
     forecastList.innerHTML = '';
     fetch(`${serviceUrl}${urlParams}`)
@@ -93,6 +94,3 @@ function getForecast() {
             });
         });
 }
-
-
-getForecastLocation();
