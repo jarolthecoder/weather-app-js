@@ -33,7 +33,7 @@ body {
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
-    padding: 3rem 0;
+    padding: 1rem 0;
     font-family: var(--ff-body);
     background: linear-gradient(var(--clr-dark-blue), var(--clr-light-blue));
 }
@@ -77,13 +77,12 @@ h4 {
     color: var(--clr-max-temp);
 }
 
-.search-btn {
+.search-btn,
+.search-input,
+.forecast-holder h4 {
     font-size: var(--fs-regular);
 }
 
-.search-input {
-    font-size: var(--fs-medium);
-}
 .location,
 .time {
     font-size: var(--fs-large);
@@ -96,7 +95,8 @@ h4 {
 .day,
 .current-day,
 .temperature,
-.temp-title,
+.min-title,
+.max-title,
 .scale {
     font-weight: var(--fw-bold);
 }
@@ -125,13 +125,13 @@ main,
     display: flex;
     justify-content: center;
     align-items: stretch;
-    gap: 1rem;
+    gap: 0.2rem;
 }
 
 .search-input {
-    width: 50%;
+    width: 88.88%;
     padding: 0.5rem 1rem;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 2px solid var(--clr-grey);
     background: none;
 }
@@ -147,9 +147,14 @@ main,
 
 .search-btn {
     padding: 0.5rem 1.5rem;
-    border-radius: 3px;
+    border-radius: 5px;
     border: none;
-    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background: var(--clr-grey);
+    transition: background ease 0.2s;
 }
 
 /* FORECAST DISPLAY ============================================================= */
@@ -212,14 +217,6 @@ main,
 
     .temperature {
         font-size: 3rem;
-    }
-
-    body {
-        padding: 1.5rem 0;
-    }
-
-    header {
-        display: none;
     }
 
     header,
