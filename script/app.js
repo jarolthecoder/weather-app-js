@@ -1,5 +1,9 @@
+const backgroundVideo = document.querySelector('.weather-video source');
+const videoFilter = document.querySelector('.video-mask');
+
 const searchForm = document.querySelector('.search-holder');
 const searchInput = document.querySelector('.search-input');
+
 const locationTimezone = document.querySelector('.location');
 const temperature = document.querySelector('.temperature');
 const weatherIcon = document.querySelectorAll('.weather-icon');
@@ -13,13 +17,24 @@ const apiKey = '0cb85d1b78724adcb31145606222206';
 let serviceUrl;
 let urlParams;
 
-
 // Gets forecast based on user search
 searchForm.addEventListener('submit', (e)=> {
     const userInput = searchInput.value;
+    const charAccepted = /^[A-Za-z]+$/;
     e.preventDefault();
+    searchInput.value = '';
     urlParams = `key=${apiKey}&q=${userInput}&days=7`;
-    getForecast();    
+
+    if(userInput.match(charAccepted)) {
+        getForecast();
+        searchInput.setAttribute('placeholder', 'Search city...'); 
+        searchInput.style.borderColor = '#d2d2d2';
+        searchInput.classList.remove('invalid-input');
+    }   else {
+        searchInput.setAttribute('placeholder', 'Invalid city name');
+        searchInput.style.borderColor = '#ff6262';
+        searchInput.classList.add('invalid-input');
+    }
 });
 
 // Gets forecast of the users current location
@@ -56,10 +71,60 @@ function getForecast() {
 
                 // Current weather display
                 locationTimezone.innerHTML = `${name}, ${country}`;
-                temperature.innerHTML = Math.floor(temp_f) + '°' + 'F';
+                temperature.innerHTML = `${Math.floor(temp_f)}°F`;
                 tempDescription.innerHTML = condition.text;
-                minTemp.innerHTML = Math.floor(mintemp_f) + '°';
-                maxTemp.innerHTML = Math.floor(maxtemp_f) + '°';
+                minTemp.innerHTML = `${Math.floor(mintemp_f)}°F`;
+                maxTemp.innerHTML = `${Math.floor(maxtemp_f)}°F`;
+
+                // Background video based on weather condition
+                switch (condition.text) {
+                    case 'Overcast':
+                    case 'Partly cloudy':
+                    case 'Cloudy':  
+                    case 'Patchy rain possible':
+                    case 'Patchy snow possible': 
+                    case 'Patchy sleet possible':
+                    case 'Patchy freezing drizzle possible':
+                    case 'Thundery outbreaks possible':
+                    case 'Mist':
+                    case 'Fog':
+                    case 'Freezing fog':
+                        backgroundVideo.src = './assets/cloudy.mp4';
+                        videoFilter.style.background = 'linear-gradient(#0e0e0e8a, #040404d5)';
+                        break
+                    
+                    case 'Sunny':
+                        backgroundVideo.src = './assets/sun.mp4';
+                        videoFilter.style.background = 'linear-gradient(#303e8f0e, #2f96a3a5)';
+                        break
+
+                    case 'Rainy':
+                    case 'Light rain':
+                    case 'Moderate rain':
+                    case 'Moderate rain at times':
+                    case 'Patchy light rain"': 
+                    case 'Patchy light drizzle':
+                    case 'Light drizzle':
+                    case 'Freezing drizzle':
+                    case 'Heavy freezing drizzle':
+                        backgroundVideo.src = './assets/rain.mp4';
+                        videoFilter.style.background = 'linear-gradient(#0000, #040404d4)'
+                        break
+                    
+                    case 'Snow':
+                        backgroundVideo.src = './assets/snow.mp4';
+                        videoFilter.style.background = 'linear-gradient(#2f5da3c8, #1c2b6182)';
+                        break
+
+                    case 'Clear':
+                        backgroundVideo.src = './assets/clear-night-2.mp4';
+                        videoFilter.style.background = 'linear-gradient(#06071479, #03030ce5)';
+                        break
+                    
+                }
+
+                document.querySelector('video').load();
+                document.querySelector('video').play();
                 
                 // Dynamic markup for each forecast day
                 forecastday.forEach((f) => {

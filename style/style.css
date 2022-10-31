@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 :root {
     --clr-white: #fff;
+    --clr-light-grey: #f7f7f7;
     --clr-grey: #d2d2d2;
     --clr-text-dark: #090b15;
     --clr-light-blue: #2f96a3;
     --clr-dark-blue: #303e8f;
     --clr-min-temp: #bdd3ff;
     --clr-max-temp: #feb4b4;
+    --clr-invalid-input: #ff6262;
 
     --ff-body: 'DM Sans', sans-serif;
 
@@ -16,8 +18,6 @@
     --fs-large: 2rem;
 
     --fw-regular: 400;
-    --fw-bold: 700;
-
 }
 
 /* GENERAL ADJUST =============================================================== */
@@ -29,13 +29,38 @@
     padding: 0;
 }
 
+.video-mask {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.sunny {background: linear-gradient(#303e8f0e, #2f96a3a5);}
+
+.snowing {background: linear-gradient(#2f5da3c8, #1c2b6182);}
+
+.rainy {background: linear-gradient(#0e0e0e4e, #040404d4);}
+
+.cloudy {background: linear-gradient(#0e0e0e8a, #040404d5);}
+
+.clear-night {background: linear-gradient(#06071479, #03030ce5);}
+
+.weather-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
 body {
+    position: relative;
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
     padding: 1rem 0;
     font-family: var(--ff-body);
-    background: linear-gradient(var(--clr-dark-blue), var(--clr-light-blue));
 }
 
 ul {
@@ -47,6 +72,7 @@ main {
     width: 100%;
     max-width: 750px;
     padding: 1rem 0;
+    z-index: 1;
 }
 
 main {
@@ -98,7 +124,7 @@ h4 {
 .min-title,
 .max-title,
 .scale {
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-regular);
 }
 
 /* DISPLAY FLEX =============================================================== */
@@ -140,15 +166,45 @@ main,
     color: var(--clr-grey);
 }
 
+.invalid-input::placeholder {
+    color: var(--clr-invalid-input);
+}
+
+.invalid-input {
+    animation: shake 0.72s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 .search-input:focus {
     outline: none;
-    border-color: var(--clr-light-blue);
+    border-color: var(--clr-white);
 }
 
 .search-btn {
     padding: 0.5rem 1.5rem;
     border-radius: 5px;
     border: none;
+    background-color: var(--clr-light-grey);
     cursor: pointer;
 }
 
