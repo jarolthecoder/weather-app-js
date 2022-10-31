@@ -13,8 +13,8 @@ function getForecast() {
             const {latitude: lat, longitude: long} = position.coords;
 
             // Weather API
-            const apiKey = '0cb85d1b78724adcb31145606222206';
             let serviceUrl;
+            const apiKey = '0cb85d1b78724adcb31145606222206';
             const urlParams = `key=${apiKey}&q=${lat},${long}&days=7`;
 
             if (location.protocol === 'http:') {
@@ -56,12 +56,12 @@ function getForecast() {
                                                             </figure>
                                                         <div class="min-max-holder card-right">
                                                             <p>
-                                                                <span class="temp-title min-title">Min: </span>
-                                                                <span class="card-min-temp">${f.day.mintemp_f}°F</span>
+                                                                <span class="temp-title min-title">Min </span>
+                                                                <span class="card-min-temp">${Math.floor(f.day.mintemp_f)}°F</span>
                                                             </p>
                                                             <p>
-                                                                <span class="temp-title max-title">Max: </span>
-                                                                <span class="card-max-temp">${f.day.maxtemp_f}°F</span>
+                                                                <span class="temp-title max-title">Max </span>
+                                                                <span class="card-max-temp">${Math.floor(f.day.maxtemp_f)}°F</span>
                                                             </p>
                                                         </div>
                                                     `

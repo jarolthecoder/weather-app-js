@@ -230,8 +230,4 @@ main,
     .weather-icon {
         width: 40px;
     }
-
-    .weather-card {
-        grid-template-columns: repeat(2, 1fr) 2fr;
-    }
 }
