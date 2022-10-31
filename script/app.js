@@ -119,8 +119,7 @@ function getForecast() {
                     case 'Clear':
                         backgroundVideo.src = './assets/clear-night-2.mp4';
                         videoFilter.style.background = 'linear-gradient(#06071479, #03030ce5)';
-                        break
-                    
+                        break   
                 }
 
                 document.querySelector('video').load();
