@@ -122,7 +122,10 @@ function getForecast() {
                         break   
                 }
 
+
                 document.querySelector('video').load();
+                document.querySelector('video').setAttribute("playsinline", "");
+                document.querySelector('video').setAttribute("muted", "");
                 document.querySelector('video').play();
                 
                 // Dynamic markup for each forecast day
