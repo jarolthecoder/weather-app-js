@@ -54,7 +54,7 @@ window.addEventListener('load', ()=> {
             getForecast();
         });
     }
-})
+});
 
 // Forecast API Call
 function getForecast() {
@@ -158,7 +158,7 @@ function getForecast() {
                 const errorMSG = document.querySelector('.error-msg');
                 errorMSG.style.display = 'block';
                 errorMSG.innerHTML = 'Error connecting, try again in a few minutes';
-            })
+            });
         });
 }
 
