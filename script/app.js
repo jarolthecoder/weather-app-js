@@ -68,6 +68,7 @@ function getForecast() {
                 const {name, country} = data.location;
                 const {forecastday} = data.forecast;
                 const {maxtemp_f, mintemp_f} = forecastday[0].day;
+        
 
                 // Current weather display
                 locationTimezone.innerHTML = `${name}, ${country}`;
@@ -76,10 +77,9 @@ function getForecast() {
                 minTemp.innerHTML = `${Math.floor(mintemp_f)}°F`;
                 maxTemp.innerHTML = `${Math.floor(maxtemp_f)}°F`;
 
-                // Background video based on weather condition
+                // Background video change based on weather condition
                 switch (condition.text) {
                     case 'Overcast':
-                    case 'Partly cloudy':
                     case 'Cloudy':  
                     case 'Patchy rain possible':
                     case 'Patchy snow possible': 
@@ -94,6 +94,7 @@ function getForecast() {
                         break
                     
                     case 'Sunny':
+                    case 'Partly cloudy':
                         backgroundVideo.src = './assets/sun.mp4';
                         videoFilter.style.background = 'linear-gradient(#303e8f0e, #2f96a3a5)';
                         break
@@ -107,11 +108,31 @@ function getForecast() {
                     case 'Light drizzle':
                     case 'Freezing drizzle':
                     case 'Heavy freezing drizzle':
+                    case 'Light rain shower':
+                    case 'Moderate or heavy rain shower':
+                    case 'Torrential rain shower':
+                    case 'Light sleet showers':
+                    case 'Moderate or heavy sleet showers':
+                    case 'Patchy light rain with thunder':
+                    case 'Moderate or heavy rain with thunder':
                         backgroundVideo.src = './assets/rain.mp4';
                         videoFilter.style.background = 'linear-gradient(#0000, #040404d4)'
                         break
                     
                     case 'Snow':
+                    case 'Blowing snow':
+                    case 'Blizzard':
+                    case 'Light sleet':
+                    case 'Moderate or heavy sleet':
+                    case 'Patchy light snow':
+                    case 'Light snow':
+                    case 'Patchy moderate snow':
+                    case 'Moderate snow':
+                    case 'Patchy heavy snow':
+                    case 'Heavy snow':
+                    case 'Ice pellets':
+                    case 'Patchy light snow with thunder':
+                    case 'Moderate or heavy snow with thunder':
                         backgroundVideo.src = './assets/snow.mp4';
                         videoFilter.style.background = 'linear-gradient(#2f5da3c8, #1c2b6182)';
                         break
@@ -122,42 +143,45 @@ function getForecast() {
                         break   
                 }
 
-
                 document.querySelector('video').load();
                 document.querySelector('video').setAttribute("playsinline", "");
                 document.querySelector('video').setAttribute("muted", "");
                 document.querySelector('video').play();
                 
-                // Dynamic markup for each forecast day
-                forecastday.forEach((f) => {
-                    const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                    const date = new Date(`${f.date}`);
-                    const currentDay = weekDays[date.getDay()];
-
-                    const forecastItem = document.createElement('li');
-                    forecastList.appendChild(forecastItem);
-                    forecastItem.classList.add('weather-card');
-                    forecastItem.innerHTML =`   <div class="card-left">
-                                                    <h3 class="day">${currentDay}</h3>
-                                                </div>
-                                                <figure class="weather-icon-holder">
-                                                        <img src="${f.day.condition.icon}" alt="" class="weather-icon">
-                                                    </figure>
-                                                <div class="min-max-holder card-right">
-                                                    <p>
-                                                        <span class="min-title">Min </span>
-                                                        <span class="card-min-temp">${Math.floor(f.day.mintemp_f)}°F</span>
-                                                    </p>
-                                                    <p>
-                                                        <span class="max-title">Max </span>
-                                                        <span class="card-max-temp">${Math.floor(f.day.maxtemp_f)}°F</span>
-                                                    </p>
-                                                </div>
-                                            `
-                });
+                // Dynamic markup for each day
+                forecastday.forEach( f => listMarkup(f));
+                
                 // First item of forecast list - Current day
                 const day = document.querySelectorAll('.day');
                 day[0].innerHTML = 'Today';
             });
         });
+}
+
+// Creates markup for each forecast day
+function listMarkup(f) {
+    const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const date = new Date(`${f.date}`);
+    const currentDay = weekDays[date.getDay()];
+
+    const forecastItem = document.createElement('li');
+    forecastList.appendChild(forecastItem);
+    forecastItem.classList.add('weather-card');
+    forecastItem.innerHTML =`   <div class="card-left">
+                                    <h3 class="day">${currentDay}</h3>
+                                </div>
+                                <figure class="weather-icon-holder">
+                                        <img src="${f.day.condition.icon}" alt="" class="weather-icon">
+                                    </figure>
+                                <div class="min-max-holder card-right">
+                                    <p>
+                                        <span class="min-title">Min </span>
+                                        <span class="card-min-temp">${Math.floor(f.day.mintemp_f)}°F</span>
+                                    </p>
+                                    <p>
+                                        <span class="max-title">Max </span>
+                                        <span class="card-max-temp">${Math.floor(f.day.maxtemp_f)}°F</span>
+                                    </p>
+                                </div>
+                            `
 }
