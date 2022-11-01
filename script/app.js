@@ -14,7 +14,7 @@ const maxTemp = document.querySelector('.max-temp');
 
 // Weather API
 const apiKey = '0cb85d1b78724adcb31145606222206';
-let serviceUrl;
+const serviceUrl = 'https://api.weatherapi.com/v1/forecast.json?';
 let urlParams;
 
 // Gets forecast based on user search
@@ -44,13 +44,6 @@ window.addEventListener('load', ()=> {
             const {latitude: lat, longitude: long} = position.coords;
 
             urlParams = `key=${apiKey}&q=${lat},${long}&days=7`;
-
-            if (location.protocol === 'http:') {
-                serviceUrl = 'http://api.weatherapi.com/v1/forecast.json?';
-            } else {
-                serviceUrl = 'https://api.weatherapi.com/v1/forecast.json?';
-            }
-
             getForecast();
         });
     }
@@ -59,7 +52,7 @@ window.addEventListener('load', ()=> {
 // Forecast API Call
 function getForecast() {
     forecastList.innerHTML = '';
-    fetch(`${serviceUrl}${urlParams}`, {method: 'GET',headers: {'Content-Type': 'application/json'}})
+    fetch(`${serviceUrl}${urlParams}`)
         .then(resp => { resp.json()
             .then(data => {
                 // Data destructuring
