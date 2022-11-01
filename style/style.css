@@ -64,7 +64,8 @@ h2,
 .temperature,
 .scale,
 .temp-description,
-.min-max-holder  {
+.min-max-holder,
+.attribution-link {
     color: var(--clr-white);
 }
 
@@ -75,7 +76,8 @@ h4 {
 .min-title {
     color: var(--clr-min-temp);
 }
-.max-title {
+.max-title,
+.error-msg  {
     color: var(--clr-max-temp);
 }
 
@@ -251,6 +253,24 @@ main,
 
 .min-max-holder {
     padding-top: 1rem;
+}
+
+.error-msg {
+    display: none;
+    padding: 2rem 0;
+    text-align: center;
+    font-size: var(--fs-medium);
+}
+
+#main-footer {
+    position: relative;
+    z-index: 1;
+    color: var(--clr-light-grey);
+    text-align: center;
+}
+
+.attribution-link:hover {
+    color: var(--clr-min-temp);
 }
 
 /* Responsive Adjust ======================================================================*/
