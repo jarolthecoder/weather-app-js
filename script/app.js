@@ -13,6 +13,7 @@ const minTemp = document.querySelector('.min-temp');
 const maxTemp = document.querySelector('.max-temp');
 
 // Weather API
+// Go to 'https://www.weatherapi.com/' and get your API key for Free
 const apiKey = '0cb85d1b78724adcb31145606222206';
 let serviceUrl;
 let urlParams;
