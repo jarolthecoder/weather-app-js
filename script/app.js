@@ -154,7 +154,7 @@ function getForecast() {
                 const day = document.querySelectorAll('.day');
                 day[0].innerHTML = 'Today';
             })
-            .catch((error) => {
+            .catch(() => {
                 const errorMSG = document.querySelector('.error-msg');
                 errorMSG.style.display = 'block';
                 errorMSG.innerHTML = 'Error connecting, try again in a few minutes';
