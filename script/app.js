@@ -38,7 +38,7 @@ searchForm.addEventListener('submit', (e)=> {
     }
 });
 
-// Gets forecast of the users current location on window load
+// Gets forecast based on user's current location on window load
 window.addEventListener('load', ()=> {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( position => {
