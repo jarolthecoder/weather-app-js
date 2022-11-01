@@ -37,7 +37,7 @@ searchForm.addEventListener('submit', (e)=> {
     }
 });
 
-// Gets forecast of the users current location
+// Gets forecast of the users current location on window load
 window.addEventListener('load', ()=> {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( position => {
@@ -56,11 +56,10 @@ window.addEventListener('load', ()=> {
     }
 })
 
-
 // Forecast API Call
 function getForecast() {
     forecastList.innerHTML = '';
-    fetch(`${serviceUrl}${urlParams}`)
+    fetch(`${serviceUrl}${urlParams}`, {method: 'GET',headers: {'Content-Type': 'application/json'}})
         .then(resp => { resp.json()
             .then(data => {
                 // Data destructuring
@@ -69,7 +68,6 @@ function getForecast() {
                 const {forecastday} = data.forecast;
                 const {maxtemp_f, mintemp_f} = forecastday[0].day;
         
-
                 // Current weather display
                 locationTimezone.innerHTML = `${name}, ${country}`;
                 temperature.innerHTML = `${Math.floor(temp_f)}°F`;
@@ -79,6 +77,13 @@ function getForecast() {
 
                 // Background video change based on weather condition
                 switch (condition.text) {
+                    case 'Sunny':
+                    case 'Partly cloudy':
+                    default:
+                        backgroundVideo.src = './assets/sun.mp4';
+                        videoFilter.style.background = 'linear-gradient(#303e8f0e, #2f96a3a5)';
+                        break
+                        
                     case 'Overcast':
                     case 'Cloudy':  
                     case 'Patchy rain possible':
@@ -91,12 +96,6 @@ function getForecast() {
                     case 'Freezing fog':
                         backgroundVideo.src = './assets/cloudy.mp4';
                         videoFilter.style.background = 'linear-gradient(#0e0e0e8a, #040404d5)';
-                        break
-                    
-                    case 'Sunny':
-                    case 'Partly cloudy':
-                        backgroundVideo.src = './assets/sun.mp4';
-                        videoFilter.style.background = 'linear-gradient(#303e8f0e, #2f96a3a5)';
                         break
 
                     case 'Rainy':
@@ -115,7 +114,7 @@ function getForecast() {
                     case 'Moderate or heavy sleet showers':
                     case 'Patchy light rain with thunder':
                     case 'Moderate or heavy rain with thunder':
-                        backgroundVideo.src = './assets/rain.mp4';
+                        backgroundVideo.src = './assets/cloudy-rain.mp4';
                         videoFilter.style.background = 'linear-gradient(#0000, #040404d4)'
                         break
                     
@@ -158,7 +157,7 @@ function getForecast() {
         });
 }
 
-// Creates markup for each forecast day
+// Creates HTML markup for each forecast day
 function listMarkup(f) {
     const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const date = new Date(`${f.date}`);
